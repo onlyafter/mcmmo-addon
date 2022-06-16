@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+}
+
+group('io.github.onlyafter')
+version('1.0-SNAPSHOT')
+
+repositories {
+    mavenCentral()
+
+    maven { url('https://oss.sonatype.org/content/groups/public/') }
+    maven {url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    maven { url = 'https://repo.codemc.org/repository/maven-public/' }
+
+    maven { url('https://oss.sonatype.org/content/groups/public/') }
+    maven { url('https://jitpack.io/') }
+    maven { url('https://repo.lucko.me/') }
+
+}
+
+dependencies {
+
+    compileOnly fileTree('libs')
+    compileOnly('net.luckperms:api:5.4')
+
+    def lombok = 'org.projectlombok:lombok:1.18.24'
+    compileOnly(lombok)
+    annotationProcessor(lombok)
+}
+
+shadowJar {
+    archiveName("${project.name}-${project.version}.jar")
+
+}
+
+tasks {
+    build {
+        dependsOn('shadowJar')
+    }
+}
+
+compileJava {
+    options.encoding('UTF-8')
+
+    targetCompatibility('1.8')
+    sourceCompatibility('1.8')
+}

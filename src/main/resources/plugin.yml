@@ -1,0 +1,3 @@
+name: mcmmo-addon
+version: '${version}'
+main: io.github.onlyafter.mcmmoaddon.McmmoAddonPlugin
